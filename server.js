@@ -23,7 +23,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(
-    cors()
+    cors({
+        origin: 'http://164.92.101.70:3000',
+    })
 );
 
 
