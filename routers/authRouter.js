@@ -420,6 +420,15 @@ router.get("/interpreterinfo", async (req, res) => {
     User.find({ isInterpreter: "interpreter" }).then((users) => res.send({ data: users }))
 })
 
+router.post("/availability", async(req, res) => {
+    const updated = req.body
+    User.findById(updated._id, async function(err, user) {
+        user.availableTime = updated.availableTime
+        user.save()
+        .then(res.send('updated'))
+    })
+})
+
 router.post("/save", async(req, res) => {
     const updatedState = req.body.updatedState
     const year = req.body.year;
