@@ -22,6 +22,12 @@ const userSchema = mongoose.Schema({
         day: {
             type: String
         },
+        hour: {
+            type: String
+        },
+        minute: {
+            type: String
+        },
         worktime: {
             type: Number
         }

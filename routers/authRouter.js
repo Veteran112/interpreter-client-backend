@@ -431,15 +431,17 @@ router.post("/availability", async(req, res) => {
 
 router.post("/save", async(req, res) => {
     const updatedState = req.body.updatedState
+    console.log(updatedState, 'updatedState')
     const year = req.body.year;
     const month = req.body.month;
     const date = req.body.date;
     for (var k in updatedState) {
-        User.findById(updatedState[k]._id, async function(err, user) {
-
-            const dateExist = user.date.find((item) => item.year == year && item.month == month && item.day == date)
+        User.findById(updatedState[k].id, async function(err, user) {
+            console.log(user, 'user')
+            const dateExist = user.date.find((item) =>item._id = updatedState[k]._id && item.year == year && item.month == month && item.day == date)
             if (dateExist) {
                 dateExist.worktime = updatedState[k].date.worktime
+                console.log(user, 'updatedExist')
                 await user.save()
             } else {
                 const query = {_id : updatedState[k]._id }
@@ -449,7 +451,7 @@ router.post("/save", async(req, res) => {
                             year, // year: year
                             month, // month: month
                             day: date,
-                            worktime: updatedState[k].date.worktime
+                            worktime: updatedState[k].worktime
                         }
                     }   
                 })

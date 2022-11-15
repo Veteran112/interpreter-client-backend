@@ -22,11 +22,10 @@ const PORT = process.env["PORT"] || 5000;
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(
-    cors({
-        origin: 'http://164.92.101.70:3000',
-    })
-);
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 
 app.use(function (req, res, next) {
@@ -59,7 +58,7 @@ mongoose.connect(
     },
     (err) => {
         if (err) console.error(err);
-        console.log("Database connected");
+        else console.log("Database connected");
     }
 );
 
